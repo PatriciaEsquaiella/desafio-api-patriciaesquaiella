@@ -5,9 +5,14 @@ Dado('tenho um usuário criado') do
     expect(@response_create['code']).to eq(201)
 end
 
-Quando('eu envio um nome válido para alterar um usuário') do
+Quando('envio um {string} válido para alterar um usuário') do |dado|
     @user_id = parse_response(@response_create)['data']['id']
-    @response_change = @change_user_page.change_name_user(@url, @headers, @user_id)
+    if dado == 'genero'
+        gender = @response_create['data']['gender']
+        @response_change = @change_user_page.change_gender_user(@url, @headers, @user_id, gender)
+    else
+        @response_change = @change_user_page.change_attribute_user(@url, @headers, @user_id, dado)
+    end
 end
   
 Então('o usuário é alterado com sucesso') do
@@ -18,8 +23,15 @@ Então('busco por esse usuário') do
     @response_search = @search_user_page.search_user(@url, @user_id)
 end
   
-Então('é apresentado com o nome alterado') do
-    user_name_old = @response_create['data']['name']
-    user_name_new = @response_change['data']['name']
-    expect(@user_name_new).not_to eq user_name_old 
+Então('é apresentado com o {string} alterado') do |dado|
+    case dado
+    when 'nome'
+        expect(@response_search['data']['name']).not_to eq (@response_create['data']['name'])
+    when 'email'
+        expect(@response_search['data']['email']).not_to eq (@response_create['data']['email'])
+    when 'genero'
+        expect(@response_search['data']['gender']).not_to eq (@response_create['data']['gender'])
+    when 'status'
+        expect(@response_search['data']['status']).not_to eq (@response_create['data']['status'])
+    end
 end
