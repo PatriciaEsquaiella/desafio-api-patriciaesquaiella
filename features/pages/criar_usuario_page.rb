@@ -10,8 +10,18 @@ class CreateUserPage
         HTTParty.post(url, headers: headers, body: body.to_json)
     end
 
-    def create_invalid_user(url, headers)
-        body = @payload.create_invalid_user
+    def create_user_invalid_email(url, headers)
+        body = @payload.create_user_invalid_email
+        HTTParty.post(url, headers: headers, body: body.to_json)
+    end
+
+    def create_user_invalid_gender(url, headers)
+        body = @payload.create_user_invalid_gender
+        HTTParty.post(url, headers: headers, body: body.to_json)
+    end
+
+    def create_user_invalid_status(url, headers)
+        body = @payload.create_user_invalid_status
         HTTParty.post(url, headers: headers, body: body.to_json)
     end
 end

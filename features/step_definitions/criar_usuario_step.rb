@@ -19,10 +19,18 @@ Então('é apresentado na lista de usuários') do
     expect(@response_list['data'][0]['id']).to eq @user_id
 end
 
-Quando('eu envio dados inválido de um usuário') do
-    @response_create = @create_user_page.create_invalid_user(@url, @headers)
+Quando('eu envio um usuário com email inválido') do
+    @response_create = @create_user_page.create_user_invalid_email(@url, @headers)
 end
   
 Então('o usuário não é criado') do
     expect(@response_create['code']).to eq(422)
+end
+
+Quando('eu envio um usuário com gênero inválido') do
+    @response_create = @create_user_page.create_user_invalid_gender(@url, @headers)
+end
+
+Quando('eu envio um usuário com status inválido') do
+    @response_create = @create_user_page.create_user_invalid_status(@url, @headers)
 end

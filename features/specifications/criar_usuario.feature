@@ -12,6 +12,16 @@ Funcionalidade: Criar Usuário
         E é apresentado na lista de usuários
 
     @criar_usuario @usuario_invalido
-    Cenario: Criar um usuário inválido
-        Quando eu envio dados inválido de um usuário
+    Cenario: Criar um usuário com email inválido
+        Quando eu envio um usuário com email inválido
+        Então o usuário não é criado
+
+    @criar_usuario @usuario_invalido
+    Cenario: Criar um usuário com gênero inválido
+        Quando eu envio um usuário com gênero inválido
+        Então o usuário não é criado
+
+    @criar_usuario @usuario_invalido
+    Cenario: Criar um usuário com status inválido
+        Quando eu envio um usuário com status inválido
         Então o usuário não é criado
