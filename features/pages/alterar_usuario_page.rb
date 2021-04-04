@@ -32,4 +32,18 @@ class ChangeUserPage
             expect(changed_user['data']['name']).not_to eq (old_user['data']['name'])
         end
     end
+
+    def change_invalid_attribute_user(url, headers, user_id, attribute)
+        case attribute
+        when 'nome'
+            body = @payload.change_invalid_name_user
+        when 'email'
+            body = @payload.change_invalid_email_user
+        when 'genero'
+            body = @payload.change_invalid_gender_user
+        when 'status'
+            body = @payload.change_invalid_status_user
+        end
+        HTTParty.put(url + "/#{user_id}", headers: headers, body: body.to_json)
+    end
 end

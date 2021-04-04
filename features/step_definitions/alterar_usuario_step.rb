@@ -35,3 +35,12 @@ Então('é apresentado com o {string} alterado') do |dado|
         expect(@response_search['data']['status']).not_to eq (@response_create['data']['status'])
     end
 end
+
+Quando('envio um {string} inválido para alterar um usuário') do |dado|
+    @user_id = parse_response(@response_create)['data']['id']
+    @response_change = @change_user_page.change_invalid_attribute_user(@url, @headers, @user_id, dado)
+end
+  
+Então('o usuário não é alterado com sucesso') do
+    expect(@response_change['code']).to eq(422)
+end

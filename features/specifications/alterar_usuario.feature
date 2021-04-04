@@ -19,3 +19,15 @@ Funcionalidade: Alterar Usuário
             |email      |
             |genero     |
             |status     |
+
+    @alterar_usuario @usuario_invalido
+    Esquema do Cenario: Alterar usuário com insucesso
+        Quando envio um "<dado>" inválido para alterar um usuário
+        Então o usuário não é alterado com sucesso
+
+        Exemplos:
+            |dado       |
+            |nome       |
+            |email      |
+            |genero     |
+            |status     |

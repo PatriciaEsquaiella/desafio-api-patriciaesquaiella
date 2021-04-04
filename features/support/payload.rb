@@ -64,4 +64,28 @@ class PayloadUser
             status: 'Inactive'
         }
     end
+
+    def change_invalid_name_user
+        {
+            name: ''
+        }
+    end
+    
+    def change_invalid_email_user
+        {
+            email: ''
+        }
+    end
+    
+    def change_invalid_gender_user
+        {
+            gender: 'INVALID'
+        }
+    end
+
+    def change_invalid_status_user
+        {
+            status: 'INVALID'
+        }
+    end
 end
